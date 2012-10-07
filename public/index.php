@@ -1,15 +1,15 @@
 <?php
 
-switch ($_GET['action']) {
-    case 'open':
-        session_start();
-        list($key, $value) = explode(',', $_GET['item']);
-        $_SESSION[$key] = $value;
-        break;
+use SessionManager\SessionManager;
+use SessionManager\SessionTestHandler;
 
-    case 'close':
-        session_destroy();
-        break;
+require_once '../library/bootstrap.php';
+
+new SessionManager(new SessionTestHandler);
+session_name('teste');
+session_start();
+
+if (!isset($_SESSION['hello'])) {
+    $_SESSION['hello'] = 'hello session on!!';
 }
-
-var_dump($_SESSION);
+    var_dump($_SESSION['hello']);

@@ -3,12 +3,12 @@
 namespace SessionManager;
 
 /**
- * 
+ * Interface by SessionHandlers
  *
  * @author leandro <leandro@leandroleite.info>
  */
-interface SessionHandler {
-    
+interface ISessionHandler {
+
     public function open($savePath, $sessionId);
 
     public function close();

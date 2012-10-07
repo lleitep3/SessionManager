@@ -2,21 +2,26 @@
 
 namespace SessionManager;
 
-class SessionManager {
+/**
+ * SessionManager
+ *
+ * @author leandro <leandro@leandroleite.info>
+ */
+class SessionManager implements ISessionHandler {
 
     protected $sessionHandler;
-    
-    public function __construct(SessionHandler $sessionHandler) {
+
+    public function __construct(ISessionHandler $sessionHandler) {
 
         $this->sessionHandler = $sessionHandler;
-        
+
         session_set_save_handler(
-            array($this, "open"),
-            array($this, "close"),
-            array($this, "read"),
-            array($this, "write"),
-            array($this, "destroy"),
-            array($this, "gc")
+                array($this, "open")
+                , array($this, "close")
+                , array($this, "read")
+                , array($this, "write")
+                , array($this, "destroy")
+                , array($this, "gc")
         );
     }
 
@@ -43,4 +48,5 @@ class SessionManager {
     public function gc($maxlifetime) {
         return $this->sessionHandler->gc($maxlifetime);
     }
+
 }
